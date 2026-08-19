@@ -93,15 +93,15 @@ while running:
 
     if "delete" in parts[0] and len(parts)>1: #syntax: delete ID
         for t in tasks:
-             if t.id == parts[1]:
-                  print(f" deleted {t.pop()}")
-                  list_commands["all"]
+            if t.id == parts[1]:
+                  print(f" deleted {t}")
+                  t.destroy()
+            list_commands["all"]
          
 
     
     
          
-
 
 
     
