@@ -71,6 +71,8 @@ def setIDIndex():
           IDVals.append(ta.id)
     return max(IDVals) + 1
 
+#importing would go here
+
 id_index = setIDIndex()
 
     
@@ -131,14 +133,17 @@ while running:
                   
                   print(f" deleted {t}")
                   t.destroy()
-            list_commands["all"]
+                  list_commands["all"]()
 
     if "complete" in parts[0] and len(parts)>1: # complete ID
         for t in tasks:
-            if t.id == parts[1]:
+            if t.id == int(parts[1]):
                 t.status = "completed"
-                list_commands["all"]
+                t.updatedAt = f"updated on {currentDate} at {currentTime}"
+                list_commands["all"]()
 
+    if "save" in parts[0] and len(parts)>1:
+         pass
     else:pass
 
 """ TODO: 
