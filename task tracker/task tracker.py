@@ -27,34 +27,42 @@ class Task:
     def destroy(self):
         tasks.remove(self)
 
+    def __str__(self):
+        return f"{self.status} task: {self.title}"
+
         
 
 TT1 = Task("poop", "completed", 1 , "8/18/2026", "8/18/2027")
 TT2 = Task("eat urine","incompleted", 2 , "8/18/2026", "8/18/2027")
 
 
+def printTask(t):
+     print(f"   {"☐" if t.status == "incompleted" else "🗹"}     {t.id}   {t.title}  {t.createdAt}  {t.updatedAt}\n" )
+
 def list_all():
-        print("STATUS   ID   NAME ")
+        print("STATUS   ID   NAME    CREATED    UPDATED")
 
         for t in tasks:
-            print(f"{"☐" if t.status == "incompleted" else "🗹"}   {t.id}   {t.title} \n" )
+            printTask(t)
 
 
 def list_completed():
         
-        print("STATUS   ID   NAME ")
+        print("STATUS   ID   NAME    CREATED    UPDATED")
 
         for t in tasks:
             if t.status == "completed":
-                print(f"{"☐" if t.status == "incompleted" else "🗹"}   {t.id}   {t.title} \n" )
+                printTask(t)
+                
 
 
 def list_incompleted():
-        print("STATUS   ID   NAME ")
+        print("STATUS   ID   NAME    CREATED    UPDATED")
 
         for t in tasks:
             if t.status == "incompleted":
-                print(f"{"☐" if t.status == "incompleted" else "🗹"}   {t.id}   {t.title} \n" )
+                printTask(t)
+                
 
 #sets ID index based off existing tasks (run this AFTER importing JSON file)
 def setIDIndex():
@@ -69,23 +77,49 @@ id_index = setIDIndex()
 list_commands = {
     "all": list_all,
     "completed": list_completed,
-    "incompleted": list_incompleted
+    "incompleted" : list_incompleted
 }
 
 while running:
 
     menu_input = input("welcome to the TASK CLI. Don't forget to save before you leave!  \n")
     parts = menu_input.split()
+
+    currentDate = str(datetime.now()).split()[0]
+    currentTime =  str(datetime.now()).split()[1] #getr current times
+
     #print(parts) debug line
     #print(datetime.now()) returned 2026-08-18 23:02:29.654075
+    if "help" == parts[0] or "h" == parts[0] or "man" == parts[0]:
+         print(""" 
+         first is a template for how to read others. each command has an example below it
+         - mainCommand [subcommands (third identifier)] #description
+                
+         - list [status (all, completed, incompleted)] #lists all tasks, filtered by status 
+            list all #lists all tasks regardless of completion
+
+        - add [title] #add a task
+            add say hello to bobby #adds "say hello to bobby" as a task
+
+        - delete [ID] #deletes a task by ID. can check the list of tasks to find its id with "list all" 
+            delete 3 #deletes task with ID of 3
+        
+        - complete [ID] #completes a task
+            complete 3 #you get the idea 
+        
+        
+        
+           """)
+
     if "list" in parts[0] and len(parts)>1: #main command
-        list_commands[parts[1]]() #subcommand tied to dict of the same type
+        try: list_commands[parts[1]]() #subcommand tied to dict of the same type
+        except: pass # if you mispell you nimwit dont worry you wont break the program
 
     if "add" in parts[0] and len(parts)>1:
-        currentDate = str(datetime.now()).split()[0]
-        currentTime =  str(datetime.now()).split()[1] #getr current times
+        """        currentDate = str(datetime.now()).split()[0]
+        currentTime =  str(datetime.now()).split()[1] #getr current times"""
 
-        Task(parts[1:], "incompleted", id_index, f"saved on {currentDate} at {currentTime}", f"updated on {currentDate} at {currentTime}")
+        Task(" ".join(parts[1:]), "incompleted", id_index, f"created on {currentDate} at {currentTime}", f"updated on {currentDate} at {currentTime}")
 
         list_commands["all"]() #list updated tasklist
 
@@ -93,19 +127,24 @@ while running:
 
     if "delete" in parts[0] and len(parts)>1: #syntax: delete ID
         for t in tasks:
-            if t.id == parts[1]:
+            if t.id == int(parts[1]):
+                  
                   print(f" deleted {t}")
                   t.destroy()
             list_commands["all"]
-    if "complete" in parts[0] and len(parts)>1: # complete ID
 
+    if "complete" in parts[0] and len(parts)>1: # complete ID
         for t in tasks:
-            if t.ID == parts[1]:
+            if t.id == parts[1]:
                 t.status = "completed"
                 list_commands["all"]
 
-    
-    
+    else:pass
+
+""" TODO: 
+        add the save and load feature
+        add to the save feature the ability to delete all completed tasks before saving (or save excluding completed)
+    """
          
 
 
