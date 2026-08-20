@@ -8,7 +8,7 @@ tasks = []
 
 
 #architecture: at the start load the JSON file into task objects
-#useful chars:  🗹  ◻  
+#useful chars:  🗹  ☐ 
   
 id_index = 0
 
@@ -37,7 +37,7 @@ def list_all():
         print("STATUS   ID   NAME ")
 
         for t in tasks:
-            print(f"{"◻" if t.status == "incompleted" else "🗹"}   {t.id}   {t.title} \n" )
+            print(f"{"☐" if t.status == "incompleted" else "🗹"}   {t.id}   {t.title} \n" )
 
 
 def list_completed():
@@ -46,7 +46,7 @@ def list_completed():
 
         for t in tasks:
             if t.status == "completed":
-                print(f"{"◻" if t.status == "incompleted" else "🗹"}   {t.id}   {t.title} \n" )
+                print(f"{"☐" if t.status == "incompleted" else "🗹"}   {t.id}   {t.title} \n" )
 
 
 def list_incompleted():
@@ -54,7 +54,7 @@ def list_incompleted():
 
         for t in tasks:
             if t.status == "incompleted":
-                print(f"{"◻" if t.status == "incompleted" else "🗹"}   {t.id}   {t.title} \n" )
+                print(f"{"☐" if t.status == "incompleted" else "🗹"}   {t.id}   {t.title} \n" )
 
 #sets ID index based off existing tasks (run this AFTER importing JSON file)
 def setIDIndex():
@@ -97,7 +97,12 @@ while running:
                   print(f" deleted {t}")
                   t.destroy()
             list_commands["all"]
-         
+    if "complete" in parts[0] and len(parts)>1: # complete ID
+
+        for t in tasks:
+            if t.ID == parts[1]:
+                t.status = "completed"
+                list_commands["all"]
 
     
     
