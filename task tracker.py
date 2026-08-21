@@ -144,14 +144,18 @@ while running:
 
     if "save" in parts[0] and len(parts)>1:
         if parts[1] == "all":
-             for t in tasks:
-                  jsonBit = json.dumps(t.__dict__) #json cant serialize class instances, must be dictionaries
-                  with open("data.json","w") as file:
-                       file.write("")
+            with open("data.json","w") as file: #starting bracket
+                       file.write("[")
+            for t in tasks:
+                jsonBit = json.dumps(t.__dict__) #json cant serialize class instances, must be dictionaries
+            
+            
+                with open("data.json","a") as file:
+                    file.write(f"{jsonBit + "," if tasks[]},\n}")
+                    print(f"saved list as:{jsonBit}")
+            with open("data.json", "a") as file:#closing bracket
+                 file.write("]")
                   
-                  with open("data.json","a") as file:
-                       file.write(f"{jsonBit} \n")
-                  print(f"saved list as:{jsonBit}")
     else:pass
 
 """ TODO: 
