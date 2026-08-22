@@ -72,6 +72,14 @@ def setIDIndex():
     return max(IDVals) + 1
 
 #importing would go here
+with open('data.json', 'r') as file:
+    try:
+        taskData = json.load(file)
+        for dict in taskData:
+            Task(dict)
+    except json.decoder.JSONDecodeError: print("data file is empty, ignore this message if new!")
+         
+    
 
 id_index = setIDIndex()
 
@@ -143,23 +151,21 @@ while running:
                 list_commands["all"]()
 
     if "save" in parts[0] and len(parts)>1:
-        if parts[1] == "all":
-            with open("data.json","w") as file: #starting bracket
-                       file.write("[")
-            for t in tasks:
-                jsonBit = json.dumps(t.__dict__) #json cant serialize class instances, must be dictionaries
+        if parts[1] == "all": # if user saves all tasks
+            exportTasks = [t.__dict__ for t in tasks]
+            with open("data.json","w") as file: #clear file
+                       file.write("")
             
-            
-                with open("data.json","a") as file:
-                    file.write(f"{jsonBit + "," if tasks[]},\n}")
-                    print(f"saved list as:{jsonBit}")
-            with open("data.json", "a") as file:#closing bracket
-                 file.write("]")
-                  
+                 #json cant serialize class instances, must be dictionaries
+            with open("data.json","a") as file:
+                json.dump(exportTasks, file, indent= 1)
+                print("saved!")
+                
+
+
     else:pass
 
 """ TODO: 
-        add the save and load feature
         add to the save feature the ability to delete all completed tasks before saving (or save excluding completed)
     """
          
