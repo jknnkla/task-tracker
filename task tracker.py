@@ -32,8 +32,8 @@ class Task:
 
         
 
-TT1 = Task("poop", "completed", 1 , "8/18/2026", "8/18/2027")
-TT2 = Task("eat urine","incompleted", 2 , "8/18/2026", "8/18/2027")
+"""TT1 = Task("poop", "completed", 1 , "8/18/2026", "8/18/2027")
+TT2 = Task("eat urine","incompleted", 2 , "8/18/2026", "8/18/2027")"""
 
 
 def printTask(t):
@@ -117,7 +117,8 @@ while running:
         - complete [ID] #completes a task
             complete 3 #you get the idea 
         
-        
+        - save all #saves it all dumbass
+
         
            """)
 
