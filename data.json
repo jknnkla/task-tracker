@@ -1,0 +1,23 @@
+[
+ {
+  "id": 1,
+  "title": "poop",
+  "status": "completed",
+  "createdAt": "8/18/2026",
+  "updatedAt": "8/18/2027"
+ },
+ {
+  "id": 2,
+  "title": "eat urine",
+  "status": "completed",
+  "createdAt": "8/18/2026",
+  "updatedAt": "updated on 2026-08-22 at 00:27:08.098973"
+ },
+ {
+  "id": 3,
+  "title": "skinch nico",
+  "status": "incompleted",
+  "createdAt": "created on 2026-08-22 at 00:27:01.043163",
+  "updatedAt": "updated on 2026-08-22 at 00:27:01.043163"
+ }
+]
