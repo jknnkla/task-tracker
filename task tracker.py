@@ -122,11 +122,11 @@ while running:
         
            """)
 
-    if "list" in parts[0] and len(parts)>1: #main command
+    if "list" ==parts[0] and len(parts)>1: #main command
         try: list_commands[parts[1]]() #subcommand tied to dict of the same type
         except: pass # if you mispell you nimwit dont worry you wont break the program
 
-    if "add" in parts[0] and len(parts)>1:
+    if "add" == parts[0] and len(parts)>1:
         """        currentDate = str(datetime.now()).split()[0]
         currentTime =  str(datetime.now()).split()[1] #getr current times"""
 
@@ -136,7 +136,7 @@ while running:
 
         id_index += 1
 
-    if "delete" in parts[0] and len(parts)>1: #syntax: delete ID
+    if "delete" == parts[0] and len(parts)>1: #syntax: delete ID
         for t in tasks:
             if t.id == int(parts[1]):
                   
@@ -144,14 +144,14 @@ while running:
                   t.destroy()
                   list_commands["all"]()
 
-    if "complete" in parts[0] and len(parts)>1: # complete ID
+    if "complete" == parts[0] and len(parts)>1: # complete ID
         for t in tasks:
             if t.id == int(parts[1]):
                 t.status = "completed"
                 t.updatedAt = f"updated on {currentDate} at {currentTime}"
                 list_commands["all"]()
 
-    if "save" in parts[0] and len(parts)>1:
+    if "save" == parts[0] and len(parts)>1:
         if parts[1] == "all": # if user saves all tasks
             exportTasks = [t.__dict__ for t in tasks]
             with open("data.json","w") as file: #clear file
